@@ -1,7 +1,7 @@
 ﻿name: marketplace-api-412
 services:
   products-api:
-    container_name: products-api
+    container_name: products-api-412
     image: products-api-412
     build:
       context: .
@@ -10,17 +10,35 @@ services:
       - "5032:8080"
     environment:
       ASPNETCORE_ENVIRONMENT: Development
-      ASPNETCORE_URLS: http://+:8080
+      PRODUCTS_DB_CONNECTION_STRING: ${PRODUCTS_DB_CONNECTION_STRING}
+    depends_on:
+      - products-db
     restart: always
   
   products-db:
-    container_name: products_db
+    container_name: products-db-412
     image: postgres:18.4-alpine3.23
     ports:
-      - "5432:5432"
+      - "5033:5432"
     environment:
-      POSTGRES_DB: ${POSTGRES_DB}
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${PRODUCTS_DB_NAME}
+      POSTGRES_USER: ${PRODUCTS_DB_USER}
+      POSTGRES_PASSWORD: ${PRODUCTS_DB_PASSWORD}
+    volumes:
+      - products-data:/var/lib/postgresql
     restart: always
-      
+  
+  migrations:
+    container_name: migrations-412
+    image: migrations-412
+    build:
+      context: .
+      dockerfile: Migrations/Dockerfile
+    environment:
+      PRODUCTS_DB_CONNECTION_STRING: ${PRODUCTS_DB_CONNECTION_STRING}
+    restart: no
+
+volumes:
+  products-data:
+    
+

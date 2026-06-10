@@ -4,7 +4,7 @@ using ProductsApi.Modules.Products.Db.Entities;
 
 namespace ProductsApi.Modules.Shared.Db;
 
-public sealed class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(options)
+public sealed class ProductsDbContext(DbContextOptions<ProductsDbContext> options) : DbContext(options)
 {
     public DbSet<ProductEntity> Products => Set<ProductEntity>();
 

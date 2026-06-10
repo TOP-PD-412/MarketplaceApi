@@ -8,6 +8,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProductsApi", "ProductsApi\ProductsApi.csproj", "{ED2F4C69-5EA9-45DB-BE4D-E5E2E18433D0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Migrations", "Migrations\Migrations.csproj", "{19D45B7D-7220-4254-A8B7-7576E7C2A2FB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{ED2F4C69-5EA9-45DB-BE4D-E5E2E18433D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ED2F4C69-5EA9-45DB-BE4D-E5E2E18433D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ED2F4C69-5EA9-45DB-BE4D-E5E2E18433D0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{19D45B7D-7220-4254-A8B7-7576E7C2A2FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{19D45B7D-7220-4254-A8B7-7576E7C2A2FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{19D45B7D-7220-4254-A8B7-7576E7C2A2FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{19D45B7D-7220-4254-A8B7-7576E7C2A2FB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

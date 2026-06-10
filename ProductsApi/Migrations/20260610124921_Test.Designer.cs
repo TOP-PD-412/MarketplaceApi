@@ -12,8 +12,8 @@ using ProductsApi.Modules.Shared.Db;
 namespace ProductsApi.Migrations
 {
     [DbContext(typeof(ProductsDbContext))]
-    [Migration("20260608131148_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20260610124921_Test")]
+    partial class Test
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
