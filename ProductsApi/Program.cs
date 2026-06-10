@@ -9,9 +9,9 @@ using ProductsApi.Modules.Shared.Db;
 
 namespace ProductsApi;
 
-public class Program
+public static class Program
 {
-    public static void Main(string[] args)
+    public static async Task Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
 
@@ -23,8 +23,8 @@ public class Program
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
 
-        builder.Services.AddDbContext<AppDbContext>(options => options.UseNpgsql(
-            builder.Configuration.GetConnectionString("ProductsDB"))
+        builder.Services.AddDbContext<ProductsDbContext>(options => options.UseNpgsql(
+            builder.Configuration["PRODUCTS_DB_CONNECTION_STRING"])
         );
 
         #region Services
@@ -61,6 +61,6 @@ public class Program
 
         app.MapControllers();
 
-        app.Run();
+        await app.RunAsync();
     }
 }
