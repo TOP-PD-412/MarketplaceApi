@@ -1,12 +1,13 @@
-﻿using ProductsApi.Modules.Products.Domain.Models;
+﻿using ProductsApi.Modules.Products.Dtos.Requests;
+using ProductsApi.Modules.Products.Dtos.Responses;
 
 namespace ProductsApi.Modules.Products.Services;
 
 public interface IProductsService
 {
-    Task<ProductModel?> GetProductAsync(Guid id);
-    Task<IEnumerable<ProductModel>> GetAllProductsAsync();
-    Task AddProductAsync(ProductModel product);
-    Task UpdateProductAsync(ProductModel product);
+    Task<GetProductResponse?> GetProductAsync(Guid id);
+    Task<IEnumerable<GetProductResponse>> GetAllProductsAsync();
+    Task<CreateProductResponse> AddProductAsync(CreateProductRequest request);
+    Task<UpdateProductResponse> UpdateProductAsync(UpdateProductRequest request, Guid id);
     Task RemoveProductAsync(Guid id);
 }

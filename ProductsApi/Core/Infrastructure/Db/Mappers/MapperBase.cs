@@ -7,11 +7,19 @@ public abstract class MapperBase<TModel, TEntity> : IMapper<TModel, TEntity>
     where TEntity : EntityBase, new()
     where TModel : ModelBase, new()
 {
-    public abstract TEntity MapToEntity(TModel model);
+    public virtual TEntity MapToEntity(TModel model) =>
+        new()
+        {
+            Id = model.Id,
+            CreatedAt = model.CreatedAt,
+            UpdatedAt = model.UpdatedAt,
+        };
 
     public virtual TModel MapToModel(TEntity entity) =>
         new()
         {
-            Id = entity.Id
+            Id = entity.Id,
+            CreatedAt = entity.CreatedAt,
+            UpdatedAt = entity.UpdatedAt,
         };
 }

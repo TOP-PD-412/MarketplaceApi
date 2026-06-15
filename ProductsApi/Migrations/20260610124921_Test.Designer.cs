@@ -11,7 +11,7 @@ using ProductsApi.Modules.Shared.Db;
 
 namespace ProductsApi.Migrations
 {
-    [DbContext(typeof(ProductsDbContext))]
+    [DbContext(typeof(AppDbContext))]
     [Migration("20260610124921_Test")]
     partial class Test
     {

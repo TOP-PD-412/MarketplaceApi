@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using ProductsApi.Core.Constants;
 using ProductsApi.Modules.Shared.Db;
 
 namespace Migrations;
@@ -7,8 +8,8 @@ public static class Program
 {
     public static async Task Main(string[] args)
     {
-        var productsDbConnectionString = CreateConnection("PRODUCTS_DB_CONNECTION_STRING");
-        await using var productsDb = new ProductsDbContext(new DbContextOptionsBuilder<ProductsDbContext>()
+        var productsDbConnectionString = CreateConnection(Config.Envs.Db.Connection);
+        await using var productsDb = new AppDbContext(new DbContextOptionsBuilder<AppDbContext>()
             .UseNpgsql(productsDbConnectionString).Options);
         await productsDb.Database.MigrateAsync();
     }

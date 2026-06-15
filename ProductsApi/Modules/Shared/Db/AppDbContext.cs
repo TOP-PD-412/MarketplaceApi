@@ -4,7 +4,7 @@ using ProductsApi.Modules.Products.Db.Entities;
 
 namespace ProductsApi.Modules.Shared.Db;
 
-public sealed class ProductsDbContext(DbContextOptions<ProductsDbContext> options) : DbContext(options)
+public sealed class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(options)
 {
     public DbSet<ProductEntity> Products => Set<ProductEntity>();
 
@@ -13,18 +13,27 @@ public sealed class ProductsDbContext(DbContextOptions<ProductsDbContext> option
         base.OnModelCreating(modelBuilder);
         modelBuilder.Entity<ProductEntity>(entity =>
         {
-            entity.ToTable("products");
-            entity.HasKey(e => e.Id);
+            entity.ToTable("products")
+                .HasKey(e => e.Id);
 
             entity.Property(e => e.Id)
                 .HasColumnName("id")
-                .HasDefaultValueSql("gen_random_uuid()")
-                .ValueGeneratedOnAdd();
+                .ValueGeneratedNever();
 
             entity.Property(e => e.Name)
                 .HasColumnName("name")
                 .HasMaxLength(Limits.Product.Name.MaxLength)
                 .IsRequired();
+
+            entity.Property(e => e.CreatedAt)
+                .HasColumnName("created_at")
+                .IsRequired()
+                .ValueGeneratedNever();
+
+            entity.Property(e => e.UpdatedAt)
+                .HasColumnName("updated_at")
+                .IsRequired()
+                .ValueGeneratedNever();
         });
     }
 }

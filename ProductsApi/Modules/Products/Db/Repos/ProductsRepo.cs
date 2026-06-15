@@ -8,5 +8,5 @@ namespace ProductsApi.Modules.Products.Db.Repos;
 
 public interface IProductsRepo : IRepoBase<ProductModel>;
 
-public sealed class ProductsRepo(ProductsDbContext ctx, IMapper<ProductModel, ProductEntity> mapper)
+public sealed class ProductsRepo(AppDbContext ctx, IMapper<ProductModel, ProductEntity> mapper)
     : RepoBase<ProductModel, ProductEntity>(ctx, ctx.Products, mapper), IProductsRepo;

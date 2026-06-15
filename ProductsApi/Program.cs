@@ -1,4 +1,6 @@
+using dotenv.net;
 using Microsoft.EntityFrameworkCore;
+using ProductsApi.Core.Constants;
 using ProductsApi.Core.Infrastructure.Db.Mappers;
 using ProductsApi.Modules.Products.Db.Entities;
 using ProductsApi.Modules.Products.Db.Mappers;
@@ -13,7 +15,11 @@ public static class Program
 {
     public static async Task Main(string[] args)
     {
+        DotEnv.Load();
+
         var builder = WebApplication.CreateBuilder(args);
+
+        builder.Configuration.AddEnvironmentVariables();
 
         // Add services to the container.
 
@@ -23,8 +29,8 @@ public static class Program
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
 
-        builder.Services.AddDbContext<ProductsDbContext>(options => options.UseNpgsql(
-            builder.Configuration["PRODUCTS_DB_CONNECTION_STRING"])
+        builder.Services.AddDbContext<AppDbContext>(options => options.UseNpgsql(
+            builder.Configuration[Config.Envs.Db.Connection])
         );
 
         #region Services

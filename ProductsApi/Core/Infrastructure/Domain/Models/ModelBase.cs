@@ -1,11 +1,14 @@
 ﻿namespace ProductsApi.Core.Infrastructure.Domain.Models;
 
-public abstract class ModelBase
+public abstract record ModelBase
 {
-    public Guid Id { get; init; }
+    public Guid Id { get; init; } = Guid.CreateVersion7();
+    public DateTime CreatedAt { get; init; }
+    public DateTime UpdatedAt { get; init; }
 
-    public override bool Equals(object? obj) =>
-        obj is ModelBase other && Id == other.Id;
-
-    public override int GetHashCode() => Id.GetHashCode();
+    protected TSelf Touch<TSelf>() where TSelf : ModelBase =>
+        (TSelf)this with
+        {
+            UpdatedAt = DateTime.UtcNow
+        };
 }
