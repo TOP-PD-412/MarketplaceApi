@@ -12,7 +12,7 @@ services:
       ASPNETCORE_ENVIRONMENT: Development
       DB_CONNECTION: ${PRODUCTS_DB_CONNECTION}
     depends_on:
-      - products-db
+      - products-migrations
     restart: always
   
   products-db:
@@ -36,6 +36,8 @@ services:
       dockerfile: ProductsMigrations/Dockerfile
     environment:
       DB_CONNECTION: ${PRODUCTS_DB_CONNECTION}
+    depends_on:
+      - products-db
     restart: on-failure
 
 volumes:
