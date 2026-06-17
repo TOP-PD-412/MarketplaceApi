@@ -6,16 +6,16 @@ namespace ProductsApi.Modules.Products.Db.Mappers;
 
 public sealed class ProductMapper : MapperBase<ProductModel, ProductEntity>
 {
-    public override ProductEntity MapToEntity(ProductModel model) =>
-        new()
-        {
-            Name = model.Name,
-        };
-
-    public override ProductModel MapToModel(ProductEntity entity)
+    public override ProductEntity MapToEntity(ProductModel model)
     {
-        var model = base.MapToModel(entity);
-        model.Name = entity.Name;
-        return model;
+        var entity = base.MapToEntity(model);
+        entity.Name = model.Name;
+        return entity;
     }
+
+    public override ProductModel MapToModel(ProductEntity entity) =>
+        base.MapToModel(entity) with
+        {
+            Name = entity.Name
+        };
 }

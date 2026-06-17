@@ -10,7 +10,7 @@ using ProductsApi.Modules.Shared.Db;
 
 namespace ProductsApi.Migrations
 {
-    [DbContext(typeof(ProductsDbContext))]
+    [DbContext(typeof(AppDbContext))]
     partial class AppDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
@@ -25,16 +25,22 @@ namespace ProductsApi.Migrations
             modelBuilder.Entity("ProductsApi.Modules.Products.Db.Entities.ProductEntity", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("uuid")
-                        .HasColumnName("id")
-                        .HasDefaultValueSql("gen_random_uuid()");
+                        .HasColumnName("id");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created_at");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(63)
                         .HasColumnType("character varying(63)")
                         .HasColumnName("name");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("updated_at");
 
                     b.HasKey("Id");
 

@@ -10,7 +10,7 @@ services:
       - "5032:8080"
     environment:
       ASPNETCORE_ENVIRONMENT: Development
-      PRODUCTS_DB_CONNECTION_STRING: ${PRODUCTS_DB_CONNECTION_STRING}
+      DB_CONNECTION: ${PRODUCTS_DB_CONNECTION}
     depends_on:
       - products-db
     restart: always
@@ -28,15 +28,15 @@ services:
       - products-data:/var/lib/postgresql
     restart: always
   
-  migrations:
-    container_name: migrations-412
-    image: migrations-412
+  products-migrations:
+    container_name: products-migrations-412
+    image: products-migrations-412
     build:
       context: .
-      dockerfile: Migrations/Dockerfile
+      dockerfile: ProductsMigrations/Dockerfile
     environment:
-      PRODUCTS_DB_CONNECTION_STRING: ${PRODUCTS_DB_CONNECTION_STRING}
-    restart: no
+      DB_CONNECTION: ${PRODUCTS_DB_CONNECTION}
+    restart: on-failure
 
 volumes:
   products-data:
