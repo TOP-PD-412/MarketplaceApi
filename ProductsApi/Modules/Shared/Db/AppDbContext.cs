@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ProductsApi.Core.Constants;
+using ProductsApi.Core.Utils.Db;
 using ProductsApi.Modules.Products.Db.Entities;
 
 namespace ProductsApi.Modules.Shared.Db;
@@ -13,27 +14,15 @@ public sealed class AppDbContext(DbContextOptions<AppDbContext> options) : DbCon
         base.OnModelCreating(modelBuilder);
         modelBuilder.Entity<ProductEntity>(entity =>
         {
-            entity.ToTable("products")
-                .HasKey(e => e.Id);
-
-            entity.Property(e => e.Id)
-                .HasColumnName("id")
-                .ValueGeneratedNever();
+            entity.ToTableWithDefaultProps("products");
 
             entity.Property(e => e.Name)
                 .HasColumnName("name")
                 .HasMaxLength(Limits.Product.Name.MaxLength)
                 .IsRequired();
 
-            entity.Property(e => e.CreatedAt)
-                .HasColumnName("created_at")
-                .IsRequired()
-                .ValueGeneratedNever();
-
-            entity.Property(e => e.UpdatedAt)
-                .HasColumnName("updated_at")
-                .IsRequired()
-                .ValueGeneratedNever();
+            entity.Property(e => e.PreviewUrl)
+                .HasColumnName("preview_url");
         });
     }
 }

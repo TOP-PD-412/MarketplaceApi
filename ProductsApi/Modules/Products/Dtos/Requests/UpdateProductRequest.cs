@@ -8,4 +8,6 @@ public sealed record UpdateProductRequest
     [Required]
     [MaxLength(Limits.Product.Name.MaxLength)]
     public required string Name { get; init; }
+
+    public string? PreviewUrl { get; init; }
 }
