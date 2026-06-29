@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="products@localhost" uuid="6d2b055b-f1df-438a-977f-c56374551f83">
+    <data-source source="LOCAL" name="marketplace@localhost" uuid="e577171f-b14c-4c38-bc03-ee45cda1f6cc">
       <driver-ref>postgresql</driver-ref>
       <synchronize>true</synchronize>
       <configured-by-url>true</configured-by-url>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
-      <jdbc-url>jdbc:postgresql://localhost:5033/products?user=postgres&amp;password=postgres</jdbc-url>
+      <jdbc-url>jdbc:postgresql://localhost:5432/marketplace?user=postgres&amp;password=postgres</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
   </component>

@@ -8,7 +8,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProductsApi", "ProductsApi\ProductsApi.csproj", "{ED2F4C69-5EA9-45DB-BE4D-E5E2E18433D0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProductsMigrations", "ProductsMigrations\ProductsMigrations.csproj", "{19D45B7D-7220-4254-A8B7-7576E7C2A2FB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Migrations", "Migrations\Migrations.csproj", "{19D45B7D-7220-4254-A8B7-7576E7C2A2FB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "Shared\Shared.csproj", "{62832327-32F0-4456-A6AC-31489498AE9C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PurchaseApi", "PurchaseApi\PurchaseApi.csproj", "{476F4DF6-7DA6-468E-B7BD-637D8FF81151}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -24,5 +28,13 @@ Global
 		{19D45B7D-7220-4254-A8B7-7576E7C2A2FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{19D45B7D-7220-4254-A8B7-7576E7C2A2FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{19D45B7D-7220-4254-A8B7-7576E7C2A2FB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{62832327-32F0-4456-A6AC-31489498AE9C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{62832327-32F0-4456-A6AC-31489498AE9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{62832327-32F0-4456-A6AC-31489498AE9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{62832327-32F0-4456-A6AC-31489498AE9C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{476F4DF6-7DA6-468E-B7BD-637D8FF81151}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{476F4DF6-7DA6-468E-B7BD-637D8FF81151}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{476F4DF6-7DA6-468E-B7BD-637D8FF81151}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{476F4DF6-7DA6-468E-B7BD-637D8FF81151}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

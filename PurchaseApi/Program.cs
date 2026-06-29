@@ -1,13 +1,15 @@
 using dotenv.net;
 using Microsoft.EntityFrameworkCore;
 using Npgsql;
-using ProductsApi.Products;
+using PurchaseApi.Purchase;
 using Shared.Constants;
 using Shared.Infrastructure;
 using Shared.Products;
+using Shared.Purchases;
+using Shared.Users;
 using Shared.Utils;
 
-namespace ProductsApi;
+namespace PurchaseApi;
 
 public static class Program
 {
@@ -21,7 +23,6 @@ public static class Program
             builder.Configuration.AddEnvironmentVariables();
         }
 
-        // Add services to the container.
 
         builder.Services.AddControllers();
         // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
@@ -36,10 +37,16 @@ public static class Program
                 .Build()
         ));
 
+        builder.Services.AddScoped<PurchasesService>();
 
-        builder.Services.AddScoped<ProductsService>();
+        builder.Services.AddScoped<TransactionManager>();
         builder.Services.AddScoped<ProductsRepo>();
         builder.Services.AddSingleton<ProductMapper>();
+        builder.Services.AddScoped<UsersRepo>();
+        builder.Services.AddSingleton<UserMapper>();
+        builder.Services.AddScoped<PurchasesRepo>();
+        builder.Services.AddSingleton<PurchaseMapper>();
+
 
         var app = builder.Build();
 
@@ -51,14 +58,12 @@ public static class Program
             app.UseSwaggerUI(options =>
             {
                 options.RoutePrefix = "swagger";
-                options.SwaggerEndpoint("/swagger/products/v1/swagger.json", "Products API");
+                options.SwaggerEndpoint("/swagger/purchases/v1/swagger.json", "Purchases API");
             });
         }
 
         app.UseHttpsRedirection();
-
         app.UseAuthorization();
-
         app.MapControllers();
 
         await app.RunAsync();
