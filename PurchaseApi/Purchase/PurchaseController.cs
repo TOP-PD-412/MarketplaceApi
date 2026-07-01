@@ -1,22 +1,23 @@
 ﻿using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PurchaseApi.Constants;
+using Shared.Users;
 
 namespace PurchaseApi.Purchase;
 
 [ApiController]
-// [Authorize]
+[Authorize]
 [Route("api/purchase")]
 public sealed class PurchaseController(PurchasesService purchasesService) : ControllerBase
 {
     [HttpPost(Name = Routes.Purchase.Create)]
+    [Authorize(Roles = UserRole.Buyer)]
     public async Task<ActionResult> CreatePurchaseAsync([FromBody] CreatePurchaseRequest request)
     {
-        // if (!Guid.TryParse(User.FindFirstValue(ClaimTypes.NameIdentifier), out var buyerId))
-        //     return Unauthorized();
+        if (!Guid.TryParse(User.FindFirstValue(ClaimTypes.NameIdentifier), out var buyerId))
+            return Unauthorized();
 
-        var buyerId = Guid.Parse("019f03d1-6462-7500-b686-b960e3a355ab");
-        
         try
         {
             var response = await purchasesService.CretePurchaseAsync(request, buyerId);

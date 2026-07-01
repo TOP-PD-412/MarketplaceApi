@@ -11,7 +11,7 @@ public sealed class AppDbContextFactory : IDesignTimeDbContextFactory<AppDbConte
 {
     public AppDbContext CreateDbContext(string[] args)
     {
-        if (!EnvironmentEx.IsRunningInContainer()) DotEnv.Load();
+        if (!EnvironmentEx.IsRunningInContainer) DotEnv.Load();
         var dbConnectionString = Environment.GetEnvironmentVariable(Config.Envs.Db.Connection);
         if (string.IsNullOrWhiteSpace(dbConnectionString))
             throw new InvalidOperationException("Connection string is empty.");

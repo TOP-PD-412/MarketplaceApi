@@ -1,15 +1,10 @@
 using dotenv.net;
-using Microsoft.EntityFrameworkCore;
-using Npgsql;
-using PurchaseApi.Purchase;
-using Shared.Constants;
-using Shared.Infrastructure;
-using Shared.Products;
-using Shared.Purchases;
+using Microsoft.AspNetCore.Identity;
 using Shared.Users;
 using Shared.Utils;
+using UsersAPI.Auth;
 
-namespace PurchaseApi;
+namespace UsersApi;
 
 public static class Program
 {
@@ -32,17 +27,12 @@ public static class Program
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerWithSecurityGen();
 
-        builder.Services.AddScoped<PurchasesService>();
-        
-        builder.Services.AddScoped<TransactionManager>();
-        builder.Services.AddScoped<ProductsRepo>();
-        builder.Services.AddScoped<PurchasesRepo>();
         builder.Services.AddScoped<UsersRepo>();
-        
-        
-        builder.Services.AddSingleton<ProductMapper>();
-        builder.Services.AddSingleton<PurchaseMapper>();
         builder.Services.AddSingleton<UserMapper>();
+        
+        builder.Services.AddScoped<AuthService>();
+
+        builder.Services.AddSingleton<PasswordHasher<UserModel>>();
 
         var app = builder.Build();
 

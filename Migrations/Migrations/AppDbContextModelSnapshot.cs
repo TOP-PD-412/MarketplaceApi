@@ -76,7 +76,7 @@ namespace Migrations.Migrations
 
                     b.HasIndex("SellerId");
 
-                    b.ToTable("products");
+                    b.ToTable("products", (string)null);
                 });
 
             modelBuilder.Entity("Shared.Purchases.PurchaseEntity", b =>
@@ -118,7 +118,7 @@ namespace Migrations.Migrations
 
                     b.HasIndex("SellerId");
 
-                    b.ToTable("purchases");
+                    b.ToTable("purchases", (string)null);
                 });
 
             modelBuilder.Entity("Shared.Users.UserEntity", b =>
@@ -167,7 +167,7 @@ namespace Migrations.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("users");
+                    b.ToTable("users", (string)null);
                 });
 
             modelBuilder.Entity("Shared.Products.ProductEntity", b =>

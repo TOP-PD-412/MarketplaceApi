@@ -7,20 +7,23 @@ public sealed record UserModel : Model
 {
     public string Name { get; init; } = string.Empty;
     public string Phone { get; init; } = string.Empty;
-    public string? PasswordHash { get; init; }
-    public UserRoles Role { get; init; }
-    public UserStatuses Status { get; init; }
+    public string PasswordHash { get; init; } = string.Empty;
     public BigInteger Balance { get; init; }
+    public UserRoles Role { get; init; }
+    public UserStatuses Status { get; init; } = UserStatuses.Active;
 
-    public UserModel WithDecreasedBalance(BigInteger dec) => Touch<UserModel>()
-        with
-        {
-            Balance = Balance - dec,
-        };
-    
-    public UserModel WithIncreasedBalance(BigInteger inc) => Touch<UserModel>()
-        with
-        {
-            Balance = Balance + inc,
-        };
+    public UserModel WithDecreasedBalance(BigInteger dec) => Touch<UserModel>() with
+    {
+        Balance = Balance - dec
+    };
+
+    public UserModel WithIncreasedBalance(BigInteger inc) => Touch<UserModel>() with
+    {
+        Balance = Balance + inc
+    };
+
+    public UserModel WithPasswordHash(string passwordHash) => this with
+    {
+        PasswordHash = passwordHash
+    };
 }

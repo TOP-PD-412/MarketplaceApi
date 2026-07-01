@@ -1,13 +1,9 @@
 using dotenv.net;
-using Microsoft.EntityFrameworkCore;
-using Npgsql;
 using ProductsApi.Products;
-using Shared.Constants;
-using Shared.Infrastructure;
 using Shared.Products;
 using Shared.Utils;
 
-namespace ProductsApi;
+namespace ProductsAPI;
 
 public static class Program
 {
@@ -15,27 +11,20 @@ public static class Program
     {
         var builder = WebApplication.CreateBuilder(args);
 
-        if (!EnvironmentEx.IsRunningInContainer())
+        if (!EnvironmentEx.IsRunningInContainer)
         {
             DotEnv.Load();
             builder.Configuration.AddEnvironmentVariables();
         }
 
-        // Add services to the container.
-
         builder.Services.AddControllers();
-        // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
+        builder.Services.AddJwtAuthentication();
+        builder.Services.AddAuthorization();
+        builder.Services.AddNpgsqlWithDynamicJson();
+
         builder.Services.AddOpenApi();
         builder.Services.AddEndpointsApiExplorer();
-        builder.Services.AddSwaggerGen();
-
-        builder.Services.AddDbContext<AppDbContext>(options => options.UseNpgsql(
-            new NpgsqlDataSourceBuilder(
-                    builder.Configuration[Config.Envs.Db.Connection]
-                ).EnableDynamicJson()
-                .Build()
-        ));
-
+        builder.Services.AddSwaggerWithSecurityGen();
 
         builder.Services.AddScoped<ProductsService>();
         builder.Services.AddScoped<ProductsRepo>();
@@ -48,15 +37,12 @@ public static class Program
         {
             app.MapOpenApi();
             app.UseSwagger();
-            app.UseSwaggerUI(options =>
-            {
-                options.RoutePrefix = "swagger";
-                options.SwaggerEndpoint("/swagger/products/v1/swagger.json", "Products API");
-            });
+            app.UseSwaggerUI();
         }
 
         app.UseHttpsRedirection();
 
+        app.UseAuthentication();
         app.UseAuthorization();
 
         app.MapControllers();
