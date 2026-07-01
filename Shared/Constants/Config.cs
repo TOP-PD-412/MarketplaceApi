@@ -17,7 +17,7 @@ public static class Config
         
         public static class Jwt
         {
-            public const string Issuer = "JWT_ISSUER";
+            public const string Issuer = "JWT";
             public const string Audience = "JWT_AUDIENCE";
             public const string Secret = "JWT_SECRET";
         }
