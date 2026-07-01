@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Shared.Petitions;
 using Shared.Products;
 using Shared.Purchases;
 using Shared.Users;
@@ -10,4 +11,5 @@ public sealed class AppDbContext(DbContextOptions<AppDbContext> options) : DbCon
     public DbSet<ProductEntity> Products => Set<ProductEntity>();
     public DbSet<UserEntity> Users => Set<UserEntity>();
     public DbSet<PurchaseEntity> Purchases => Set<PurchaseEntity>();
+    public DbSet<PetitionEntity> Petitions => Set<PetitionEntity>();
 }

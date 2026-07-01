@@ -21,6 +21,20 @@ public sealed class AuthController(AuthService authService) : ControllerBase
         }
     }
 
+    [HttpPost("register/seller")]
+    public async Task<ActionResult> RegisterAsSellerAsync([FromBody] RegisterRequest request)
+    {
+        try
+        {
+            await authService.RegisterSellerAsync(request);
+            return NoContent();
+        }
+        catch (InvalidOperationException ex)
+        {
+            return Conflict(ex.Message);
+        }
+    }
+
     [HttpPost("login")]
     public async Task<ActionResult<AuthResponse>> LoginAsync([FromBody] LoginRequest request)
     {

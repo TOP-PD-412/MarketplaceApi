@@ -4,12 +4,14 @@ using System.Text;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using Shared.Petitions;
 using Shared.Users;
 
 namespace UsersAPI.Auth;
 
 public sealed class AuthService(
     UsersRepo usersRepo,
+    CreateSellerPetitionsRepo createSellerPetitionsRepo,
     PasswordHasher<UserModel> hasher,
     IOptions<JwtSettings> jwtOptions)
 {
@@ -33,6 +35,17 @@ public sealed class AuthService(
             new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
             new Claim(ClaimTypes.Role, user.Role.ToString())
         ];
+    }
+
+    public async Task RegisterSellerAsync(RegisterRequest request)
+    {
+        if (await usersRepo.FindByPhoneNumber(request.PhoneNumber) != null)
+            throw new InvalidOperationException("Phone number is already in use");
+
+        var user = request.ConvertToUser(UserRoles.Seller);
+        user = user.WithPasswordHash(hasher.HashPassword(user, request.Password));
+        var petition = user.ConvertToCreateSellerPetition();
+        await createSellerPetitionsRepo.AddAsync(petition);
     }
 
     public async Task<List<Claim>?> ValidateCredentials(LoginRequest request)

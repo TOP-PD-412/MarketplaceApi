@@ -1,5 +1,6 @@
 using dotenv.net;
 using Microsoft.AspNetCore.Identity;
+using Shared.Petitions;
 using Shared.Users;
 using Shared.Utils;
 using UsersAPI.Auth;
@@ -28,7 +29,10 @@ public static class Program
         builder.Services.AddSwaggerWithSecurityGen();
 
         builder.Services.AddScoped<UsersRepo>();
+        builder.Services.AddScoped<CreateSellerPetitionsRepo>();
         builder.Services.AddSingleton<UserMapper>();
+        builder.Services.AddSingleton<CreateSellerPetitionMapper>();
+        
         
         builder.Services.AddScoped<AuthService>();
 

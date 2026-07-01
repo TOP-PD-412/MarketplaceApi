@@ -1,12 +1,14 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Numerics;
+using Microsoft.EntityFrameworkCore;
 using Shared.Constants;
 using Shared.Infrastructure;
 
 namespace Shared.Users;
 
 [Table("users")]
+[Index(nameof(Phone), IsUnique = true)]
 public sealed class UserEntity : Entity<UserEntity>
 {
     [Required]
